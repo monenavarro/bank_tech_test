@@ -1,11 +1,11 @@
-const BankAccount = require('./BankAccount');
+const BankAccount = require('../src/BankAccount');
 
 describe("BankAccount", () => {
 
   describe("Balance", () => {
     it('should display the balance of a customer bank account', () => {
-        BankAccount = new BankAccount();
-        expect(BankAccount.balance()).toEqual (0);
+        bankAccount = new BankAccount();
+        expect(bankAccount.balance).toEqual(0);
     })
   })
 })
