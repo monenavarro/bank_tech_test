@@ -17,6 +17,11 @@ class BankAccount {
     this.balance += num;
   }
 
+  withdraw(num) {
+    this.transactions.push(-num);
+    this.balance -= num;
+  }
+
 }
 
 module.exports = BankAccount;
