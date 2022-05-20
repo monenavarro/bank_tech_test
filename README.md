@@ -21,6 +21,10 @@ date || credit || debit || balance
 
 ## Instructions 
 
+First, clone this repository using this command: git clone https://github.com/monenavarro/bank_tech_test.git
+
+Next, use the command 'npm install' to install any dependencies then run jest to run the tests for the code.
+
 ## 🎩 User Stories
 ```
 As a Bank Manager,

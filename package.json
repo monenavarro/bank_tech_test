@@ -1,0 +1,27 @@
+{
+  "name": "bank_tech_test",
+  "version": "1.0.0",
+  "description": "A sample tech test to practice maintaining high code quality and processes. This program is a command line tool.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monenavarro/bank_tech_test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/monenavarro/bank_tech_test/issues"
+  },
+  "homepage": "https://github.com/monenavarro/bank_tech_test#readme",
+  "dependencies": {
+    "jest": "^28.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0"
+  }
+}
