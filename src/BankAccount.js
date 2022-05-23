@@ -12,24 +12,19 @@ class BankAccount {
     return this.transactions;
   }
 
-  deposit(num) {
-    this.balance += num;
+  performTransaction(sum) {
+    const sort = (sum > 0) ? "debit" : "credit";
+    this.balance += sum
+    this.processTransaction(sort, sum);
+  }
+
+  processTransaction(sort, sum) {
     this.transactions.push({
       date: new Date().toLocaleDateString("en-UK"),
-      debit: num,
+      [`${sort}`]: Math.abs(sum),
       balance: this.balance
     });
   }
-
-  withdraw(num) {
-    this.balance -= num;
-    this.transactions.push({
-      date: new Date().toLocaleDateString("en-UK"),
-      credit: num,
-      balance: this.balance
-    });  
-  }
-
 }
 
 module.exports = BankAccount;
