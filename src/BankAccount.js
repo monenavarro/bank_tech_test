@@ -13,13 +13,21 @@ class BankAccount {
   }
 
   deposit(num) {
-    this.transactions.push(num);
     this.balance += num;
+    this.transactions.push({
+      date: new Date().toLocaleDateString("en-UK"),
+      debit: num,
+      balance: this.balance
+    });
   }
 
   withdraw(num) {
-    this.transactions.push(-num);
     this.balance -= num;
+    this.transactions.push({
+      date: new Date().toLocaleDateString("en-UK"),
+      credit: num,
+      balance: this.balance
+    });  
   }
 
 }
