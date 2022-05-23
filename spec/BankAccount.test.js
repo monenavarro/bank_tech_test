@@ -2,8 +2,7 @@ const BankAccount = require('../src/BankAccount');
 
 describe("BankAccount", () => {
   const bankAccount = new BankAccount();
-
-  jest.useFakeTimers().setSystemTime(new Date("2050-05-05"));
+  const currentDate = new Date().toLocaleDateString("en-UK");
 
   describe("Balance", () => {
     it('should display the balance of a customer bank account', () => {
@@ -22,8 +21,8 @@ describe("BankAccount", () => {
 
     it('logs account transactions with the time and balance', () => {
       expect(bankAccount.displayTransactions()).toEqual([
-        { date: "05/05/2050", debit: 100, balance: 100},
-        { date: "05/05/2050", credit: 50, balance: 50},
+        { date: currentDate, debit: 100, balance: 100},
+        { date: currentDate, credit: 50, balance: 50},
       ]);
     });
   });
