@@ -12,7 +12,7 @@ class BankAccount {
     this.#registerTransaction(sort, num);
   }
 
-  printStatement() {
+  printBankStatement() {
     console.log(this.bankStatement.print(this.transactions));
   }
 
