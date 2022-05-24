@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -92,13 +92,25 @@
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -108,12 +120,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -121,32 +127,50 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">class BankAccount {
-  constructor() {
-    this.balance = 0
-    this.transactions = [];
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const BankStatement = require('../src/BankStatement');
+&nbsp;
+class BankAccount {
+  constructor(bankStatement = new BankStatement()) {
+    this.bankStatement = bankStatement;
+    this.transactions = [];  
   }
 &nbsp;
-  displayBalance() {
-    return this.balance;
+  performTransaction(num) {
+    this.#insufficientFunds(num)
+    const sort = num &gt; 0 ? "debit" : "credit";
+    this.#registerTransaction(sort, num);
   }
 &nbsp;
-  displayTransactions() {
-    return this.transactions;
+  printBankStatement() {
+    console.log(this.bankStatement.print(this.transactions));
   }
 &nbsp;
-  performTransaction(sum) {
-    const sort = (sum &gt; 0) ? "debit" : "credit";
-    this.balance += sum
-    this.processTransaction(sort, sum);
-  }
-&nbsp;
-  processTransaction(sort, sum) {
+  #registerTransaction(sort, num) {
     this.transactions.push({
-      date: new Date().toLocaleDateString("en-UK"),
-      [`${sort}`]: Math.abs(sum),
-      balance: this.balance
+      currentDate: new Date(),
+      [sort]: Math.abs(num),
+      balance: this.#totalBalance(num),
     });
+  }
+&nbsp;
+  #totalBalance(num) {
+    if (this.transactions.length === 0) return num;
+    return this.transactions[this.transactions.length - 1].balance + num;
+  }
+&nbsp;
+  #insufficientFunds(num) {
+    if (num &lt; 0 &amp;&amp; this.#totalBalance(num) &lt; -num)
+    throw "ERROR! Transaction denied due to insufficient funds.";
   }
 }
 &nbsp;
@@ -157,7 +181,7 @@ module.exports = BankAccount;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon May 23 2022 15:37:21 GMT+0100 (British Summer Time)
+                at Tue May 24 2022 16:18:13 GMT+0100 (British Summer Time)
             </div>
         <script src="prettify.js"></script>
         <script>

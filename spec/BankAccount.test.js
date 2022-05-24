@@ -12,11 +12,11 @@ jest.mock("../src/BankStatement", () => {
   });
 });
 
-const date = new Date(2023, 0, 0, 0, 0, 0);
+const currentDate = new Date();
 
 describe("BankAccount", () => {
   beforeEach(() => {
-    mockDate.advanceTo(date);
+    mockDate.advanceTo(currentDate);
   });
 
   const bankAccount = new BankAccount();
@@ -39,12 +39,12 @@ describe("BankAccount", () => {
   it('logs account transactions with the time and balance', () => {
     expect(bankAccount.transactions).toEqual([
       { 
-        date: new Date(date), 
+        currentDate: new Date(currentDate), 
         debit: 100, 
         balance: 100
       },
       { 
-        date: new Date(date), 
+        currentDate: new Date(currentDate), 
         credit: 50, 
         balance: 50,
       }
@@ -52,7 +52,14 @@ describe("BankAccount", () => {
   });
 
   it('returns account users bank statement', () => {
-    bankAccount.printStatement();
+    bankAccount.printBankStatement();
     expect(bankStatement.print).toHaveBeenCalledTimes(1);
+  });
+
+  it("flags an error when a user attempts to withdraw more than what the current account balance is", () => {
+    expect(() => {
+      bankAccount.performTransaction(-70);
+    })
+    .toThrowError("ERROR! Transaction denied due to insufficient funds.");
   });
 });

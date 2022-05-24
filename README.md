@@ -25,6 +25,18 @@ First, clone this repository using this command: git clone https://github.com/mo
 
 Next, use the command 'npm install' to install any dependencies then run jest to run the tests for the code.
 
+To run the program, follow the listed commands:
+* `cd src`
+* `node`
+* `.load ./BankAccount.js`
+* `myAccount = new BankAccount();`
+* `myAccount.performTransaction(num);`
+  - positive numbers indicate a deposit into the account
+  - negative numbers solicit a withdrawal from the account
+* `myAccount.printBankStatement();` to view a current bank statement
+
+`jest --coverage` to view coverage of the code
+
 ## 🎩 User Stories
 ```
 As a Bank Manager,
