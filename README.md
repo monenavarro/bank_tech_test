@@ -1,6 +1,6 @@
 # 💸 Bank Tech Test (in JavaScript) 💸
 
-A sample tech test to practice maintaining high code quality and processes.
+A sample tech test to practice maintaining high code quality and processes such as TDD.
 This program is a command line tool. 
 
 ### *Specified  Requirements* 
@@ -63,3 +63,4 @@ As a client,
 So I can review my bank statement efficiently,
 I want statement transactions to be listed by date, from newest to oldest.
 ```
+##
