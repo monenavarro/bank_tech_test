@@ -22,6 +22,7 @@
     "jest": "^28.1.0"
   },
   "devDependencies": {
-    "eslint": "^8.15.0"
+    "eslint": "^8.15.0",
+    "jest-date-mock": "^1.0.8"
   }
 }
